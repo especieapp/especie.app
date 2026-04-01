@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espécie</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0A0A0A;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            text-align: center;
+            padding: 32px;
+            max-width: 400px;
+        }
+        .icon {
+            width: 80px;
+            height: 80px;
+            background: #1B5E20;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 40px;
+            color: #fff;
+        }
+        h1 { font-size: 28px; margin-bottom: 8px; }
+        .subtitle { color: #888; font-size: 16px; margin-bottom: 32px; }
+        .amount {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #4CAF50;
+        }
+        .desc { color: #aaa; font-size: 16px; margin-bottom: 32px; }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: #1B5E20;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-bottom: 12px;
+        }
+        .btn:hover { background: #2E7D32; }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #333;
+            color: #aaa;
+        }
+        .address {
+            background: #1a1a1a;
+            padding: 12px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 11px;
+            color: #888;
+            word-break: break-all;
+            margin-bottom: 24px;
+        }
+        .footer { color: #444; font-size: 12px; margin-top: 32px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">$</div>
+        <h1>Espécie</h1>
+        <p class="subtitle">Dinheiro digital que se comporta como dinheiro vivo.</p>
+
+        <div id="payment" style="display:none;">
+            <div class="amount" id="amount-display"></div>
+            <div class="desc" id="desc-display"></div>
+            <div class="address" id="address-display"></div>
+            <a class="btn" id="open-app-btn" href="#">Abrir no Espécie</a>
+            <button class="btn btn-outline" onclick="copyAddress()">Copiar endereço</button>
+            <div id="install-hint" style="display:none; margin-top: 20px;">
+                <p style="color: #888; font-size: 14px; margin-bottom: 12px;">Não tem o app?</p>
+                <a class="btn" href="https://github.com/malneto/especie-pay/releases/latest/download/especie-debug.apk" style="background: #333;">Instalar Espécie (Android)</a>
+            </div>
+        </div>
+
+        <div id="no-payment">
+            <p class="desc">Pagamento privado, sem rastro, sem cadastro.</p>
+        </div>
+
+        <p class="footer">Powered by Liquid Network</p>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const addr = params.get('addr');
+        const amount = params.get('amount');
+        const message = params.get('message');
+        const assetid = params.get('assetid');
+
+        if (addr) {
+            document.getElementById('payment').style.display = 'block';
+            document.getElementById('no-payment').style.display = 'none';
+
+            if (amount) {
+                document.getElementById('amount-display').textContent = 'R$ ' + amount.replace('.', ',');
+            }
+
+            if (message) {
+                document.getElementById('desc-display').textContent = decodeURIComponent(message);
+            }
+
+            const shortAddr = addr.substring(0, 16) + '...' + addr.substring(addr.length - 12);
+            document.getElementById('address-display').textContent = shortAddr;
+
+            // Build liquidnetwork: URI
+            let uri = 'liquidnetwork:' + addr;
+            const uriParams = [];
+            if (amount) uriParams.push('amount=' + amount);
+            if (assetid) uriParams.push('assetid=' + assetid);
+            if (message) uriParams.push('message=' + message);
+            if (uriParams.length > 0) uri += '?' + uriParams.join('&');
+
+            document.getElementById('open-app-btn').href = uri;
+
+            // Store full address for copy
+            window._fullAddress = addr;
+            window._fullUri = uri;
+
+            // Try to open app, show install hint if it fails
+            setTimeout(() => { window.location.href = uri; }, 500);
+            setTimeout(() => {
+                // If we're still here after 2s, app probably not installed
+                document.getElementById('install-hint').style.display = 'block';
+            }, 2000);
+        }
+
+        function copyAddress() {
+            const text = window._fullUri || window._fullAddress || '';
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.target;
+                btn.textContent = 'Copiado!';
+                setTimeout(() => { btn.textContent = 'Copiar endereço'; }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

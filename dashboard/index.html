@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espécie — Painel</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0A0A0A;
+            color: #fff;
+            min-height: 100vh;
+            padding: 32px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+        .icon {
+            width: 48px;
+            height: 48px;
+            background: #1B5E20;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        h1 { font-size: 24px; }
+        .subtitle { color: #666; font-size: 14px; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            max-width: 800px;
+        }
+        .card {
+            background: #111;
+            border-radius: 16px;
+            padding: 24px;
+        }
+        .card-label {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+        .card-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        .card-value.white { color: #fff; }
+        .card-sub {
+            color: #444;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+        .updated {
+            color: #333;
+            font-size: 12px;
+            margin-top: 32px;
+        }
+        .loading {
+            color: #444;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="icon">$</div>
+        <div>
+            <h1>Espécie</h1>
+            <div class="subtitle">Painel público</div>
+        </div>
+    </div>
+
+    <div id="loading" class="loading">Carregando métricas...</div>
+
+    <div id="dashboard" class="grid" style="display:none;">
+        <div class="card">
+            <div class="card-label">Carteiras criadas</div>
+            <div class="card-value white" id="wallets">0</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Ativos hoje</div>
+            <div class="card-value white" id="active-today">0</div>
+            <div class="card-sub">Últimos 7 dias: <span id="active-7d">0</span></div>
+        </div>
+        <div class="card">
+            <div class="card-label">Pagamentos enviados</div>
+            <div class="card-value" id="payments">0</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Volume transacionado</div>
+            <div class="card-value" id="volume">R$ 0</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Pagamentos recebidos</div>
+            <div class="card-value" id="received">0</div>
+        </div>
+        <div class="card">
+            <div class="card-label">R$ circulando na rede</div>
+            <div class="card-value" id="circulating">R$ 0</div>
+        </div>
+    </div>
+
+    <div class="updated" id="updated"></div>
+
+    <script>
+        const API = 'https://especie-analytics.malneto.workers.dev/stats';
+
+        async function load() {
+            try {
+                const res = await fetch(API);
+                const data = await res.json();
+
+                document.getElementById('wallets').textContent = data.wallets.toLocaleString('pt-BR');
+                document.getElementById('active-today').textContent = data.active_today.toLocaleString('pt-BR');
+                document.getElementById('active-7d').textContent = data.active_7d.toLocaleString('pt-BR');
+                document.getElementById('payments').textContent = data.payments.toLocaleString('pt-BR');
+                document.getElementById('received').textContent = data.received.toLocaleString('pt-BR');
+                document.getElementById('volume').textContent = 'R$ ' + parseFloat(data.volume_sent_brl).toLocaleString('pt-BR', {minimumFractionDigits: 2});
+                document.getElementById('circulating').textContent = 'R$ ' + parseFloat(data.circulating_brl).toLocaleString('pt-BR', {minimumFractionDigits: 2});
+
+                const dt = new Date(data.updated_at);
+                document.getElementById('updated').textContent = 'Atualizado: ' + dt.toLocaleString('pt-BR');
+
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'grid';
+            } catch (e) {
+                document.getElementById('loading').textContent = 'Erro ao carregar métricas';
+            }
+        }
+
+        load();
+        setInterval(load, 30000);
+    </script>
+</body>
+</html>

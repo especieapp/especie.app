@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espécie — Dinheiro digital como dinheiro vivo</title>
+    <meta name="description" content="Pague e receba sem rastro. Sem cadastro. Sem banco. Como dinheiro em espécie, mas digital.">
+    <meta property="og:title" content="Espécie">
+    <meta property="og:description" content="Dinheiro digital que se comporta como dinheiro vivo. Pague e receba sem rastro.">
+    <meta property="og:type" content="website">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0A0A0A;
+            color: #fff;
+            min-height: 100vh;
+        }
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 32px;
+            text-align: center;
+        }
+        .icon {
+            width: 96px;
+            height: 96px;
+            background: #1B5E20;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 32px;
+            font-size: 48px;
+            color: #fff;
+        }
+        h1 {
+            font-size: 42px;
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+        }
+        .tagline {
+            color: #4CAF50;
+            font-size: 20px;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        .subtitle {
+            color: #888;
+            font-size: 16px;
+            margin-bottom: 48px;
+            max-width: 320px;
+            line-height: 1.5;
+        }
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 320px;
+        }
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 16px 24px;
+            border: none;
+            border-radius: 14px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.1s, background 0.2s;
+        }
+        .btn:active { transform: scale(0.98); }
+        .btn-android {
+            background: #1B5E20;
+            color: #fff;
+        }
+        .btn-android:hover { background: #2E7D32; }
+        .btn-ios {
+            background: #1a1a1a;
+            color: #666;
+            border: 1px solid #333;
+        }
+        .features {
+            margin-top: 64px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            max-width: 360px;
+            width: 100%;
+        }
+        .feature {
+            background: #111;
+            border-radius: 12px;
+            padding: 20px 16px;
+            text-align: center;
+        }
+        .feature-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        .feature-title {
+            font-size: 14px;
+            color: #ccc;
+            font-weight: 600;
+        }
+        .feature-desc {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+        .stats {
+            margin-top: 48px;
+            display: flex;
+            gap: 32px;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+        .footer {
+            color: #333;
+            font-size: 12px;
+            margin-top: 48px;
+        }
+        .footer a {
+            color: #444;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="icon">$</div>
+        <h1>Espécie</h1>
+        <p class="tagline">Dinheiro vivo, digital.</p>
+        <p class="subtitle">Pague e receba sem rastro. Sem cadastro. Sem banco. Como dinheiro em espécie, mas no celular.</p>
+
+        <div class="buttons">
+            <a class="btn btn-android" href="https://github.com/malneto/especie-pay/releases/latest/download/especie-debug.apk">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.523 2.293l1.478 1.478-2.143 2.138A7.968 7.968 0 0120 12c0 4.418-3.582 8-8 8s-8-3.582-8-8a7.968 7.968 0 013.142-6.091L5 3.771 6.477 2.293l2.39 2.386A7.94 7.94 0 0112 4c1.128 0 2.2.234 3.173.659l2.35-2.366zM12 6c-3.314 0-6 2.686-6 6s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6zm-2 5h4v2h-4v-2z"/></svg>
+                Baixar Android
+            </a>
+            <div class="btn btn-ios">
+                iOS em breve
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">🔒</div>
+                <div class="feature-title">Privado</div>
+                <div class="feature-desc">Ninguém sabe quem pagou quem</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-title">Rápido</div>
+                <div class="feature-desc">Confirmação em ~1 minuto</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🚫</div>
+                <div class="feature-title">Sem cadastro</div>
+                <div class="feature-desc">Instala e usa. Sem CPF, sem email</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">💸</div>
+                <div class="feature-title">Grátis</div>
+                <div class="feature-desc">Pagamentos P2P sem taxa</div>
+            </div>
+        </div>
+
+        <p class="footer">Powered by Liquid Network</p>
+    </div>
+</body>
+</html>
