@@ -468,7 +468,7 @@
 
                 <div class="fee-info">
                     <span>Taxa</span>
-                    <span class="fee-value" id="feeDisplay">2% + R$ 0,99</span>
+                    <span class="fee-value" id="feeDisplay">3,9%</span>
                 </div>
 
                 <div class="addr-group">
@@ -520,7 +520,7 @@
             <div class="trust-item">
                 <div class="trust-icon">💰</div>
                 <div class="trust-title">Menor taxa</div>
-                <div class="trust-desc">A partir de 2%</div>
+                <div class="trust-desc">Apenas 3,9%</div>
             </div>
         </div>
 
@@ -542,7 +542,7 @@
                 </tr>
                 <tr>
                     <td>Taxa</td>
-                    <td class="highlight">2%</td>
+                    <td class="highlight">3,9%</td>
                     <td class="dim">4-10%</td>
                     <td class="dim">2-3%</td>
                 </tr>
@@ -588,7 +588,7 @@
             </div>
             <div class="faq-item">
                 <div class="faq-q">Qual a taxa?</div>
-                <div class="faq-a">2% + R$ 0,99 por transação. Exemplo: para R$ 100, você recebe R$ 97,01 em DEPIX.</div>
+                <div class="faq-a">3,9% por transação. Exemplo: para R$ 100, você recebe R$ 96,10 em DEPIX.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-q">Qual wallet posso usar?</div>
@@ -619,13 +619,13 @@
     $('amount').addEventListener('input', () => {
         const v = parseFloat($('amount').value.replace(',','.')) || 0;
         if (v > 0) {
-            const fee = v * 0.02 + 0.99;
+            const fee = v * 0.039;
             const recv = Math.max(0, v - fee);
             $('receiveAmount').value = recv.toFixed(2).replace('.',',');
-            $('feeDisplay').textContent = `R$ ${fee.toFixed(2).replace('.',',')} (2% + R$ 0,99)`;
+            $('feeDisplay').textContent = `R$ ${fee.toFixed(2).replace('.',',')} (3,9%)`;
         } else {
             $('receiveAmount').value = '';
-            $('feeDisplay').textContent = '2% + R$ 0,99';
+            $('feeDisplay').textContent = '3,9%';
         }
     });
 
@@ -768,7 +768,7 @@
             "@type": "Offer",
             "price": "0",
             "priceCurrency": "BRL",
-            "description": "Taxa de 2% + R$ 0,99 por transação"
+            "description": "Taxa de 3,9% por transação"
         }
     }
     </script>
