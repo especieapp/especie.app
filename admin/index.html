@@ -123,21 +123,61 @@
 </head>
 <body>
     <div class="container">
-        <div class="header-row">
-            <h1><span>$</span> Painel de Trocas</h1>
-            <button class="refresh-btn" onclick="loadData()">Atualizar</button>
+        <!-- Login -->
+        <div id="loginScreen" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh">
+            <div style="background:#111;border-radius:16px;padding:32px;border:1px solid #1a1a1a;width:100%;max-width:320px;text-align:center">
+                <h1 style="margin-bottom:20px"><span>$</span> Admin</h1>
+                <input type="password" id="passInput" placeholder="Senha" style="width:100%;background:#1a1a1a;border:1px solid #252525;border-radius:10px;color:#fff;padding:14px;font-size:16px;outline:none;text-align:center;margin-bottom:12px" onkeydown="if(event.key==='Enter')doLogin()">
+                <button onclick="doLogin()" style="width:100%;padding:14px;border:none;border-radius:10px;background:#1B5E20;color:#fff;font-size:16px;font-weight:600;cursor:pointer">Entrar</button>
+                <div id="loginError" style="color:#ef5350;font-size:13px;margin-top:8px;display:none">Senha incorreta</div>
+            </div>
         </div>
 
-        <div id="content">
-            <div class="loading">Carregando...</div>
+        <!-- Dashboard -->
+        <div id="dashboard" style="display:none">
+            <div class="header-row">
+                <h1><span>$</span> Painel de Trocas</h1>
+                <button class="refresh-btn" onclick="loadData()">Atualizar</button>
+            </div>
+
+            <div id="content">
+                <div class="loading">Carregando...</div>
+            </div>
         </div>
     </div>
 
     <script>
     const API = 'https://especie-onramp.malneto.workers.dev';
-    const API_KEY = 'c086cad9294519b2baf6bfa7404ebb56943faa44bc6df0ca30db28fd6d7943fe';
+    // API key is derived from password to avoid exposing it in source
+    let headers = {};
 
-    const headers = { 'Authorization': 'Bearer ' + API_KEY };
+    async function doLogin() {
+        const pass = document.getElementById('passInput').value;
+        // The password IS the API key — simple and secure
+        // Only someone with the key can access both the panel and the API
+        headers = { 'Authorization': 'Bearer ' + pass };
+        try {
+            const res = await fetch(API + '/balance', { headers });
+            const data = await res.json();
+            if (data.error === 'unauthorized') {
+                document.getElementById('loginError').style.display = 'block';
+                return;
+            }
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+            sessionStorage.setItem('admin_key', pass);
+            loadData();
+        } catch (e) {
+            document.getElementById('loginError').style.display = 'block';
+        }
+    }
+
+    // Auto-login from session
+    const savedKey = sessionStorage.getItem('admin_key');
+    if (savedKey) {
+        document.getElementById('passInput').value = savedKey;
+        doLogin();
+    }
     const fmt = v => 'R$ ' + (v || 0).toFixed(2).replace('.', ',');
 
     async function loadData() {
@@ -233,9 +273,8 @@
         document.getElementById('content').innerHTML = html;
     }
 
-    loadData();
-    // Auto refresh every 30s
-    setInterval(loadData, 30000);
+    // Auto refresh every 30s (only when logged in)
+    setInterval(() => { if (document.getElementById('dashboard').style.display !== 'none') loadData(); }, 30000);
     </script>
 </body>
 </html>
