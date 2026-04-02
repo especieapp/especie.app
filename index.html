@@ -420,6 +420,23 @@
         .footer a { color: #444; text-decoration: none; }
         .footer a:hover { color: #4CAF50; }
 
+        .tier-btn {
+            flex: 1;
+            background: #1a1a1a;
+            border: 1px solid #252525;
+            border-radius: 12px;
+            padding: 12px 8px;
+            color: #ccc;
+            font-size: 13px;
+            cursor: pointer;
+            text-align: center;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .tier-btn:hover { border-color: #444; }
+        .tier-active {
+            border-color: #4CAF50 !important;
+            background: rgba(76,175,80,0.08) !important;
+        }
         .error-msg {
             color: #ef5350;
             font-size: 13px;
@@ -441,8 +458,22 @@
         <div class="exchange-card">
             <!-- Step 1: Form -->
             <div id="formStep">
-                <div class="exchange-title">PIX → DEPIX Instantâneo</div>
-                <div class="exchange-subtitle">Receba DEPIX na sua wallet em ~2 minutos</div>
+                <div class="exchange-title">PIX → DEPIX</div>
+                <div class="exchange-subtitle">Escolha a velocidade</div>
+
+                <!-- Tier selector -->
+                <div style="display:flex;gap:8px;margin-bottom:20px">
+                    <button id="tierInstant" class="tier-btn tier-active" onclick="selectTier('instant')">
+                        <span style="font-size:18px">⚡</span><br>
+                        <strong>Instantâneo</strong><br>
+                        <span style="color:#888;font-size:11px">~2 min • 5% • até R$250</span>
+                    </button>
+                    <button id="tierEconomy" class="tier-btn" onclick="selectTier('economy')">
+                        <span style="font-size:18px">🕐</span><br>
+                        <strong>Econômico</strong><br>
+                        <span style="color:#888;font-size:11px">até 24h • 3,9% • até R$2.000</span>
+                    </button>
+                </div>
 
                 <div class="input-group">
                     <label class="input-label">Você envia</label>
@@ -490,9 +521,9 @@
                     <span class="copy-text" id="pixCode"></span>
                     <span class="copy-icon">📋</span>
                 </div>
-                <div class="waiting">
+                <div class="waiting" id="waitingMsg">
                     <div class="spinner"></div>
-                    Aguardando pagamento...
+                    <span id="waitingText">Aguardando pagamento...</span>
                 </div>
             </div>
 
@@ -542,7 +573,7 @@
                 </tr>
                 <tr>
                     <td>Taxa</td>
-                    <td class="highlight">3,9%</td>
+                    <td class="highlight">3,9-5%</td>
                     <td class="dim">4-10%</td>
                     <td class="dim">2-3%</td>
                 </tr>
@@ -588,7 +619,7 @@
             </div>
             <div class="faq-item">
                 <div class="faq-q">Qual a taxa?</div>
-                <div class="faq-a">3,9% por transação. Exemplo: para R$ 100, você recebe R$ 96,10 em DEPIX.</div>
+                <div class="faq-a">Modo Instantâneo (~2 min): 5%. Modo Econômico (até 24h): 3,9%. Exemplo: R$ 100 instantâneo = R$ 95 DEPIX. R$ 100 econômico = R$ 96,10 DEPIX.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-q">Qual wallet posso usar?</div>
@@ -609,7 +640,19 @@
     <script>
     const API = 'https://especie-onramp.malneto.workers.dev';
     const MIN = 50;
-    const MAX = 300;
+    let selectedTier = 'instant';
+    const TIERS = {
+        instant: { max: 250, fee: 0.05, label: '5%', eta: '~2 min' },
+        economy: { max: 2000, fee: 0.039, label: '3,9%', eta: 'até 24h' },
+    };
+
+    function selectTier(tier) {
+        selectedTier = tier;
+        document.getElementById('tierInstant').className = 'tier-btn' + (tier === 'instant' ? ' tier-active' : '');
+        document.getElementById('tierEconomy').className = 'tier-btn' + (tier === 'economy' ? ' tier-active' : '');
+        // Recalculate
+        document.getElementById('amount').dispatchEvent(new Event('input'));
+    }
     let currentOrderId = null;
     let pollInterval = null;
 
@@ -631,10 +674,11 @@
     $('amount').addEventListener('input', () => {
         const v = parseFloat($('amount').value.replace(',','.')) || 0;
         if (v > 0) {
-            const fee = v * 0.039;
+            const t = TIERS[selectedTier];
+            const fee = v * t.fee;
             const recv = Math.max(0, v - fee);
             $('receiveAmount').value = recv.toFixed(2).replace('.',',');
-            $('feeDisplay').textContent = `R$ ${fee.toFixed(2).replace('.',',')} (3,9%)`;
+            $('feeDisplay').textContent = `R$ ${fee.toFixed(2).replace('.',',')} (${t.label}) • ${t.eta}`;
         } else {
             $('receiveAmount').value = '';
             $('feeDisplay').textContent = '3,9%';
@@ -649,8 +693,9 @@
             showError(`Valor mínimo: R$ ${MIN}`);
             return;
         }
-        if (amount > MAX) {
-            showError('Valor máximo: R$ ' + MAX);
+        const tierMax = TIERS[selectedTier].max;
+        if (amount > tierMax) {
+            showError('Valor máximo: R$ ' + tierMax + ' para o modo ' + (selectedTier === 'instant' ? 'instantâneo' : 'econômico'));
             return;
         }
         if (!address || !address.startsWith('lq1q')) {
@@ -668,7 +713,7 @@
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ amount, liquid_address: address }),
+                body: JSON.stringify({ amount, liquid_address: address, tier: selectedTier }),
             });
             const data = await res.json();
 
@@ -717,10 +762,11 @@
                 $('doneStep').classList.add('active');
                 const recv = data.net_amount || data.amount;
                 $('doneMsg').textContent = `R$ ${recv.toFixed(2).replace('.',',')} em DEPIX enviados para sua wallet.`;
-
-                track('exchange_completed', { amount: data.amount, received: recv });
+                track('exchange_completed', { amount: data.amount, received: recv, tier: data.tier });
                 if (typeof fbq !== 'undefined') fbq('track', 'Purchase', {value: recv, currency: 'BRL'});
                 if (typeof gtag !== 'undefined') gtag('event', 'purchase', {value: recv, currency: 'BRL'});
+            } else if (data.status === 'pending_cold_sign') {
+                $('waitingText').textContent = 'PIX confirmado! DEPIX será enviado em até 24h.';
             }
         } catch (_) {}
     }
