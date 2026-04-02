@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espécie — Painel de Trocas</title>
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0A0A0A;
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { font-size: 24px; margin-bottom: 24px; }
+        h1 span { color: #4CAF50; }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .card {
+            background: #111;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #1a1a1a;
+        }
+        .card-label {
+            font-size: 11px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .card-value {
+            font-size: 28px;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+        .card-sub {
+            font-size: 12px;
+            color: #555;
+            margin-top: 2px;
+        }
+        .green { color: #4CAF50; }
+        .yellow { color: #FFC107; }
+        .red { color: #ef5350; }
+        .blue { color: #42A5F5; }
+
+        .section-title {
+            font-size: 16px;
+            color: #888;
+            margin: 24px 0 12px;
+            border-bottom: 1px solid #1a1a1a;
+            padding-bottom: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        th {
+            text-align: left;
+            color: #666;
+            font-weight: 500;
+            padding: 8px 6px;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        td {
+            padding: 10px 6px;
+            border-bottom: 1px solid #0f0f0f;
+        }
+        .status {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .status-completed { background: rgba(76,175,80,0.15); color: #4CAF50; }
+        .status-pending { background: rgba(255,193,7,0.15); color: #FFC107; }
+        .status-failed { background: rgba(239,83,80,0.15); color: #ef5350; }
+
+        .loading {
+            text-align: center;
+            color: #555;
+            padding: 40px;
+        }
+        .refresh-btn {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: #888;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .refresh-btn:hover { border-color: #4CAF50; color: #4CAF50; }
+        .header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+        .wallet-info {
+            display: flex;
+            gap: 16px;
+            font-size: 12px;
+            color: #555;
+        }
+        .wallet-info span { color: #888; }
+        @media (max-width: 600px) {
+            .cards { grid-template-columns: 1fr 1fr; }
+            table { font-size: 11px; }
+            td, th { padding: 8px 4px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-row">
+            <h1><span>$</span> Painel de Trocas</h1>
+            <button class="refresh-btn" onclick="loadData()">Atualizar</button>
+        </div>
+
+        <div id="content">
+            <div class="loading">Carregando...</div>
+        </div>
+    </div>
+
+    <script>
+    const API = 'https://especie-onramp.malneto.workers.dev';
+    const API_KEY = 'c086cad9294519b2baf6bfa7404ebb56943faa44bc6df0ca30db28fd6d7943fe';
+
+    const headers = { 'Authorization': 'Bearer ' + API_KEY };
+    const fmt = v => 'R$ ' + (v || 0).toFixed(2).replace('.', ',');
+
+    async function loadData() {
+        document.getElementById('content').innerHTML = '<div class="loading">Carregando...</div>';
+
+        try {
+            const [statsRes, ordersRes] = await Promise.all([
+                fetch(API + '/admin/stats', { headers }).then(r => r.json()),
+                fetch(API + '/admin/orders', { headers }).then(r => r.json()),
+            ]);
+
+            render(statsRes, ordersRes.orders || []);
+        } catch (e) {
+            document.getElementById('content').innerHTML = '<div class="loading">Erro ao carregar: ' + e.message + '</div>';
+        }
+    }
+
+    function render(stats, orders) {
+        const lbtcTxEstimate = Math.floor((stats.wallet?.lbtc_sats || 0) / 50);
+
+        let html = `
+        <div class="cards">
+            <div class="card">
+                <div class="card-label">Hoje</div>
+                <div class="card-value green">${stats.today.orders}</div>
+                <div class="card-sub">trocas</div>
+            </div>
+            <div class="card">
+                <div class="card-label">Volume hoje</div>
+                <div class="card-value">${fmt(stats.today.volume)}</div>
+                <div class="card-sub">transacionado</div>
+            </div>
+            <div class="card">
+                <div class="card-label">Receita hoje</div>
+                <div class="card-value green">${fmt(stats.today.revenue)}</div>
+                <div class="card-sub">margem</div>
+            </div>
+            <div class="card">
+                <div class="card-label">Total</div>
+                <div class="card-value blue">${stats.total.orders}</div>
+                <div class="card-sub">${fmt(stats.total.volume)} vol</div>
+            </div>
+            <div class="card">
+                <div class="card-label">Receita total</div>
+                <div class="card-value green">${fmt(stats.total.revenue)}</div>
+                <div class="card-sub">acumulado</div>
+            </div>
+            <div class="card">
+                <div class="card-label">Pendentes</div>
+                <div class="card-value yellow">${stats.pending}</div>
+                <div class="card-sub">${stats.failed} falhas</div>
+            </div>
+        </div>
+
+        <div class="wallet-info">
+            <div>DEPIX Worker: <span>${fmt(stats.wallet?.depix)}</span></div>
+            <div>L-BTC: <span>${stats.wallet?.lbtc_sats} sats</span> (~${lbtcTxEstimate} txs)</div>
+        </div>
+
+        <div class="section-title">Últimas trocas</div>
+        <table>
+            <tr>
+                <th>Data</th>
+                <th>Valor</th>
+                <th>Recebeu</th>
+                <th>Margem</th>
+                <th>Status</th>
+            </tr>`;
+
+        for (const o of orders.slice(0, 50)) {
+            const date = o.created_at ? new Date(o.created_at).toLocaleString('pt-BR', { day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' }) : '—';
+            const statusClass = o.status === 'completed' ? 'status-completed' :
+                               o.status === 'send_failed' ? 'status-failed' : 'status-pending';
+            const statusLabel = o.status === 'completed' ? 'OK' :
+                               o.status === 'pending_pix' ? 'Aguardando' :
+                               o.status === 'send_failed' ? 'Falha' : o.status;
+
+            html += `<tr>
+                <td>${date}</td>
+                <td>${fmt(o.amount)}</td>
+                <td>${o.user_receives ? fmt(o.user_receives) : '—'}</td>
+                <td class="green">${o.margin ? fmt(o.margin) : '—'}</td>
+                <td><span class="status ${statusClass}">${statusLabel}</span></td>
+            </tr>`;
+        }
+
+        html += '</table>';
+
+        if (orders.length === 0) {
+            html += '<div class="loading" style="padding:20px">Nenhuma troca ainda</div>';
+        }
+
+        document.getElementById('content').innerHTML = html;
+    }
+
+    loadData();
+    // Auto refresh every 30s
+    setInterval(loadData, 30000);
+    </script>
+</body>
+</html>

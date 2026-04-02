@@ -610,6 +610,7 @@
     const API = 'https://especie-onramp.malneto.workers.dev';
     const API_KEY = 'c086cad9294519b2baf6bfa7404ebb56943faa44bc6df0ca30db28fd6d7943fe';
     const MIN = 50;
+    const MAX = 300;
     let currentOrderId = null;
     let pollInterval = null;
 
@@ -649,8 +650,8 @@
             showError(`Valor mínimo: R$ ${MIN}`);
             return;
         }
-        if (amount > 500) {
-            showError('Valor máximo: R$ 500');
+        if (amount > MAX) {
+            showError('Valor máximo: R$ ' + MAX);
             return;
         }
         if (!address || !address.startsWith('lq1q')) {
