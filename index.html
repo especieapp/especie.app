@@ -608,7 +608,6 @@
 
     <script>
     const API = 'https://especie-onramp.malneto.workers.dev';
-    const API_KEY = 'c086cad9294519b2baf6bfa7404ebb56943faa44bc6df0ca30db28fd6d7943fe';
     const MIN = 50;
     const MAX = 300;
     let currentOrderId = null;
@@ -667,7 +666,6 @@
             const res = await fetch(API + '/deposit', {
                 method: 'POST',
                 headers: {
-                    'Authorization': 'Bearer ' + API_KEY,
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ amount, liquid_address: address }),
@@ -710,7 +708,7 @@
         if (!currentOrderId) return;
         try {
             const res = await fetch(API + '/status/' + currentOrderId, {
-                headers: { 'Authorization': 'Bearer ' + API_KEY },
+                headers: {},
             });
             const data = await res.json();
             if (data.status === 'completed') {
