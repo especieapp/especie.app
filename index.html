@@ -614,6 +614,18 @@
     let pollInterval = null;
 
     const $=id=>document.getElementById(id);
+    const ANALYTICS = 'https://especie-analytics.malneto.workers.dev/collect';
+
+    function track(event, props) {
+        fetch(ANALYTICS, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ event, properties: props || {} }),
+        }).catch(()=>{});
+    }
+
+    // Track page view
+    track('exchange_page_view', { referrer: document.referrer });
 
     // Calculate receive amount
     $('amount').addEventListener('input', () => {
@@ -680,6 +692,7 @@
             $('qrStep').classList.add('active');
 
             // Track conversion
+            track('exchange_qr_generated', { amount, address: address.slice(0, 20) });
             if (typeof fbq !== 'undefined') fbq('track', 'InitiateCheckout', {value: amount, currency: 'BRL'});
             if (typeof gtag !== 'undefined') gtag('event', 'begin_checkout', {value: amount, currency: 'BRL'});
 
@@ -706,6 +719,7 @@
                 const recv = data.net_amount || data.amount;
                 $('doneMsg').textContent = `R$ ${recv.toFixed(2).replace('.',',')} em DEPIX enviados para sua wallet.`;
 
+                track('exchange_completed', { amount: data.amount, received: recv });
                 if (typeof fbq !== 'undefined') fbq('track', 'Purchase', {value: recv, currency: 'BRL'});
                 if (typeof gtag !== 'undefined') gtag('event', 'purchase', {value: recv, currency: 'BRL'});
             }
