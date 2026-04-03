@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprar DEPIX Instantâneo — PIX para DEPIX em segundos | Espécie</title>
+    <meta name="description" content="Troque PIX por DEPIX em segundos. Sem cadastro, sem KYC, sem espera. Compre DEPIX instantaneamente com PIX. A forma mais rápida de entrar na Liquid Network.">
+    <meta name="keywords" content="comprar depix, pix para depix, depix instantaneo, trocar pix depix, depix liquid, depix brasil, comprar depix pix, depix online, pix2depix alternativa">
+    <meta property="og:title" content="Comprar DEPIX Instantâneo com PIX | Espécie">
+    <meta property="og:description" content="Troque PIX por DEPIX em segundos. Sem cadastro, sem espera. A forma mais rápida e barata.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://especie.app">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Comprar DEPIX Instantâneo com PIX">
+    <meta name="twitter:description" content="PIX → DEPIX em segundos. Sem cadastro. Sem espera.">
+    <link rel="canonical" href="https://especie.app/">
+
+    <!-- Facebook Pixel -->
+    <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    // fbq('init', 'SEU_PIXEL_ID');
+    // fbq('track', 'PageView');
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PLACEHOLDER"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    // gtag('config', 'G-SEU_ID');
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0A0A0A;
+            color: #fff;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 24px 20px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 0 32px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #fff;
+        }
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: #1B5E20;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .logo-text { font-size: 18px; font-weight: 700; }
+        .nav-link {
+            color: #4CAF50;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Exchange Card */
+        .exchange-card {
+            background: #111;
+            border-radius: 20px;
+            padding: 28px 24px;
+            border: 1px solid #1a1a1a;
+        }
+        .exchange-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .exchange-subtitle {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+        .input-group {
+            margin-bottom: 16px;
+        }
+        .input-label {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 6px;
+            display: block;
+        }
+        .input-wrapper {
+            display: flex;
+            align-items: center;
+            background: #1a1a1a;
+            border-radius: 12px;
+            border: 1px solid #252525;
+            padding: 0 16px;
+            transition: border-color 0.2s;
+        }
+        .input-wrapper:focus-within {
+            border-color: #4CAF50;
+        }
+        .input-prefix {
+            font-size: 18px;
+            color: #666;
+            font-weight: 600;
+            margin-right: 4px;
+        }
+        .input-field {
+            flex: 1;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            font-weight: 700;
+            padding: 14px 0;
+            outline: none;
+            width: 100%;
+        }
+        .input-field::placeholder { color: #333; }
+        .input-badge {
+            background: #1B5E20;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+        .input-badge-pix {
+            background: #00796B;
+        }
+
+        .arrow-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 4px 0;
+        }
+        .arrow-icon {
+            width: 36px;
+            height: 36px;
+            background: #1a1a1a;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4CAF50;
+            font-size: 18px;
+            border: 1px solid #252525;
+        }
+
+        .fee-info {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            font-size: 13px;
+            color: #666;
+            border-top: 1px solid #1a1a1a;
+            margin-top: 8px;
+        }
+        .fee-value { color: #888; }
+
+        .addr-group {
+            margin-top: 16px;
+        }
+        .addr-field {
+            width: 100%;
+            background: #1a1a1a;
+            border: 1px solid #252525;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 13px;
+            padding: 12px 16px;
+            outline: none;
+            font-family: monospace;
+            transition: border-color 0.2s;
+        }
+        .addr-field:focus { border-color: #4CAF50; }
+        .addr-field::placeholder { color: #444; }
+
+        .btn-exchange {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 14px;
+            background: #1B5E20;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.2s, transform 0.1s;
+        }
+        .btn-exchange:hover { background: #2E7D32; }
+        .btn-exchange:active { transform: scale(0.98); }
+        .btn-exchange:disabled {
+            background: #1a1a1a;
+            color: #444;
+            cursor: not-allowed;
+        }
+
+        /* QR Step */
+        .qr-section {
+            display: none;
+            text-align: center;
+        }
+        .qr-section.active { display: block; }
+        .qr-img {
+            background: #fff;
+            border-radius: 16px;
+            padding: 16px;
+            display: inline-block;
+            margin: 16px 0;
+        }
+        .qr-img img { width: 200px; height: 200px; }
+        .copy-bar {
+            display: flex;
+            align-items: center;
+            background: #1a1a1a;
+            border-radius: 10px;
+            padding: 10px 14px;
+            cursor: pointer;
+            margin-top: 12px;
+            border: 1px solid #252525;
+        }
+        .copy-bar:hover { border-color: #4CAF50; }
+        .copy-text {
+            flex: 1;
+            font-size: 11px;
+            color: #888;
+            text-align: left;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-family: monospace;
+        }
+        .copy-icon { color: #4CAF50; margin-left: 8px; }
+        .waiting {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: #888;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+        .spinner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #333;
+            border-top-color: #4CAF50;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Done */
+        .done-section {
+            display: none;
+            text-align: center;
+            padding: 32px 0;
+        }
+        .done-section.active { display: block; }
+        .done-icon {
+            width: 72px;
+            height: 72px;
+            background: rgba(76,175,80,0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 36px;
+        }
+
+        /* Trust signals */
+        .trust {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin-top: 28px;
+        }
+        .trust-item {
+            text-align: center;
+            padding: 16px 8px;
+            background: #111;
+            border-radius: 12px;
+            border: 1px solid #1a1a1a;
+        }
+        .trust-icon { font-size: 24px; margin-bottom: 6px; }
+        .trust-title { font-size: 12px; color: #ccc; font-weight: 600; }
+        .trust-desc { font-size: 11px; color: #555; margin-top: 2px; }
+
+        /* Comparison */
+        .compare {
+            margin-top: 28px;
+            background: #111;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid #1a1a1a;
+        }
+        .compare h3 {
+            font-size: 16px;
+            margin-bottom: 16px;
+            color: #ccc;
+        }
+        .compare-table {
+            width: 100%;
+            font-size: 13px;
+        }
+        .compare-table th {
+            text-align: left;
+            color: #666;
+            font-weight: 500;
+            padding: 6px 0;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        .compare-table td {
+            padding: 8px 0;
+            border-bottom: 1px solid #0f0f0f;
+        }
+        .compare-table .highlight { color: #4CAF50; font-weight: 600; }
+        .compare-table .dim { color: #555; }
+
+        /* Email */
+        .email-section {
+            margin-top: 28px;
+            background: #111;
+            border-radius: 16px;
+            padding: 20px 24px;
+            border: 1px solid #1a1a1a;
+            text-align: center;
+        }
+        .email-section p {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 12px;
+        }
+        .email-row {
+            display: flex;
+            gap: 8px;
+        }
+        .email-input {
+            flex: 1;
+            background: #1a1a1a;
+            border: 1px solid #252525;
+            border-radius: 10px;
+            color: #fff;
+            padding: 12px 14px;
+            font-size: 14px;
+            outline: none;
+        }
+        .email-input::placeholder { color: #444; }
+        .email-input:focus { border-color: #4CAF50; }
+        .email-btn {
+            background: #1B5E20;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .email-btn:hover { background: #2E7D32; }
+        .email-ok { color: #4CAF50; font-size: 13px; display: none; margin-top: 8px; }
+
+        /* FAQ */
+        .faq {
+            margin-top: 28px;
+        }
+        .faq h3 {
+            font-size: 16px;
+            color: #ccc;
+            margin-bottom: 12px;
+        }
+        .faq-item {
+            background: #111;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 8px;
+            border: 1px solid #1a1a1a;
+        }
+        .faq-q {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ddd;
+            margin-bottom: 6px;
+        }
+        .faq-a {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 32px 0 16px;
+            color: #333;
+            font-size: 12px;
+        }
+        .footer a { color: #444; text-decoration: none; }
+        .footer a:hover { color: #4CAF50; }
+
+        .tier-btn {
+            flex: 1;
+            background: #1a1a1a;
+            border: 1px solid #252525;
+            border-radius: 12px;
+            padding: 12px 8px;
+            color: #ccc;
+            font-size: 13px;
+            cursor: pointer;
+            text-align: center;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .tier-btn:hover { border-color: #444; }
+        .tier-active {
+            border-color: #4CAF50 !important;
+            background: rgba(76,175,80,0.08) !important;
+        }
+        .error-msg {
+            color: #ef5350;
+            font-size: 13px;
+            margin-top: 8px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="/" class="logo">
+                <div class="logo-icon">$</div>
+                <span class="logo-text">Espécie</span>
+            </a>
+            <a href="mailto:contato@especie.app" class="nav-link">Contato</a>
+        </div>
+
+        <div class="exchange-card">
+            <!-- Step 1: Form -->
+            <div id="formStep">
+                <div class="exchange-title">PIX → DEPIX</div>
+                <div class="exchange-subtitle">Escolha a velocidade</div>
+
+                <!-- Tier selector -->
+                <div style="display:flex;gap:8px;margin-bottom:20px">
+                    <button id="tierInstant" class="tier-btn tier-active" onclick="selectTier('instant')">
+                        <span style="font-size:18px">⚡</span><br>
+                        <strong>Instantâneo</strong><br>
+                        <span style="color:#888;font-size:11px">~2 min • 5% • até R$250</span>
+                    </button>
+                    <button id="tierEconomy" class="tier-btn" onclick="selectTier('economy')">
+                        <span style="font-size:18px">🕐</span><br>
+                        <strong>Econômico</strong><br>
+                        <span style="color:#888;font-size:11px">até 24h • 3,9% • até R$2.000</span>
+                    </button>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Você envia</label>
+                    <div class="input-wrapper">
+                        <span class="input-prefix">R$</span>
+                        <input type="text" id="amount" class="input-field" placeholder="100" inputmode="decimal">
+                        <span class="input-badge input-badge-pix">PIX</span>
+                    </div>
+                </div>
+
+                <div class="arrow-row">
+                    <div class="arrow-icon">↓</div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Você recebe</label>
+                    <div class="input-wrapper">
+                        <span class="input-prefix">R$</span>
+                        <input type="text" id="receiveAmount" class="input-field" placeholder="—" readonly>
+                        <span class="input-badge">DEPIX</span>
+                    </div>
+                </div>
+
+                <div class="fee-info">
+                    <span>Taxa</span>
+                    <span class="fee-value" id="feeDisplay">3,9%</span>
+                </div>
+
+                <div class="addr-group">
+                    <label class="input-label">Seu endereço Liquid (wallet DEPIX)</label>
+                    <input type="text" id="address" class="addr-field" placeholder="lq1qq...">
+                </div>
+
+                <div class="error-msg" id="errorMsg"></div>
+
+                <button class="btn-exchange" id="btnExchange" onclick="createDeposit()">Gerar QR PIX</button>
+            </div>
+
+            <!-- Step 2: QR -->
+            <div id="qrStep" class="qr-section">
+                <div class="exchange-title">Pague o PIX</div>
+                <div class="exchange-subtitle">Escaneie ou copie o código abaixo</div>
+                <div class="qr-img" id="qrImg"></div>
+                <div class="copy-bar" id="copyBar" onclick="copyPix()">
+                    <span class="copy-text" id="pixCode"></span>
+                    <span class="copy-icon">📋</span>
+                </div>
+                <div class="waiting" id="waitingMsg">
+                    <div class="spinner"></div>
+                    <span id="waitingText">Aguardando pagamento...</span>
+                </div>
+            </div>
+
+            <!-- Step 3: Done -->
+            <div id="doneStep" class="done-section">
+                <div class="done-icon">✓</div>
+                <div class="exchange-title">DEPIX enviado!</div>
+                <p class="exchange-subtitle" id="doneMsg">Confira sua wallet em instantes.</p>
+                <button class="btn-exchange" onclick="resetForm()" style="margin-top:16px">Nova troca</button>
+            </div>
+        </div>
+
+        <!-- Trust signals -->
+        <div class="trust">
+            <div class="trust-item">
+                <div class="trust-icon">⚡</div>
+                <div class="trust-title">Instantâneo</div>
+                <div class="trust-desc">~2 minutos</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">🔒</div>
+                <div class="trust-title">Sem cadastro</div>
+                <div class="trust-desc">Sem KYC</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">💰</div>
+                <div class="trust-title">Menor taxa</div>
+                <div class="trust-desc">Apenas 3,9%</div>
+            </div>
+        </div>
+
+        <!-- Comparison -->
+        <div class="compare">
+            <h3>Compare e escolha</h3>
+            <table class="compare-table">
+                <tr>
+                    <th></th>
+                    <th class="highlight">Espécie</th>
+                    <th>Pix2DePix</th>
+                    <th>Exchanges</th>
+                </tr>
+                <tr>
+                    <td>Tempo</td>
+                    <td class="highlight">~2 min</td>
+                    <td class="dim">24h</td>
+                    <td class="dim">1-4h</td>
+                </tr>
+                <tr>
+                    <td>Taxa</td>
+                    <td class="highlight">3,9-5%</td>
+                    <td class="dim">4-10%</td>
+                    <td class="dim">2-3%</td>
+                </tr>
+                <tr>
+                    <td>KYC</td>
+                    <td class="highlight">Não</td>
+                    <td class="dim">Sim</td>
+                    <td class="dim">Sim</td>
+                </tr>
+                <tr>
+                    <td>Mínimo</td>
+                    <td class="highlight">R$ 50</td>
+                    <td class="dim">R$ 100</td>
+                    <td class="dim">Variável</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Email capture -->
+        <div class="email-section">
+            <p>Receba alertas de taxas baixas e novidades</p>
+            <div class="email-row">
+                <input type="email" class="email-input" id="emailInput" placeholder="seu@email.com">
+                <button class="email-btn" onclick="saveEmail()">OK</button>
+            </div>
+            <div class="email-ok" id="emailOk">Pronto! Você receberá novidades.</div>
+        </div>
+
+        <!-- FAQ for SEO -->
+        <div class="faq">
+            <h3>Perguntas frequentes</h3>
+            <div class="faq-item">
+                <div class="faq-q">O que é DEPIX?</div>
+                <div class="faq-a">DEPIX é uma stablecoin brasileira na rede Liquid Network, pareada 1:1 com o Real. 1 DEPIX = R$ 1,00 sempre.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Preciso de cadastro?</div>
+                <div class="faq-a">Não. Basta informar seu endereço Liquid, pagar o PIX e receber os DEPIX. Sem email, sem CPF, sem verificação.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Quanto tempo demora?</div>
+                <div class="faq-a">Após o pagamento do PIX, os DEPIX são enviados em aproximadamente 2 minutos para o seu endereço Liquid.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Qual a taxa?</div>
+                <div class="faq-a">Modo Instantâneo (~2 min): 5%. Modo Econômico (até 24h): 3,9%. Exemplo: R$ 100 instantâneo = R$ 95 DEPIX. R$ 100 econômico = R$ 96,10 DEPIX.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Qual wallet posso usar?</div>
+                <div class="faq-a">Qualquer wallet Liquid: Aqua, Green Wallet, SideSwap, entre outras.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Não tenho wallet. Como começo?</div>
+                <div class="faq-a">Baixe uma wallet Liquid como Aqua (aquawallet.io) ou Green Wallet (blockstream.com/green). Instale, crie sua wallet e copie seu endereço Liquid.</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <a href="/dashboard">Dashboard</a> · <a href="mailto:contato@especie.app">Contato</a>
+            <br><br>Powered by Liquid Network
+        </div>
+    </div>
+
+    <script>
+    const API = 'https://especie-onramp.malneto.workers.dev';
+    const MIN = 50;
+    let selectedTier = 'instant';
+    const TIERS = {
+        instant: { max: 250, fee: 0.05, label: '5%', eta: '~2 min' },
+        economy: { max: 2000, fee: 0.039, label: '3,9%', eta: 'até 24h' },
+    };
+
+    function selectTier(tier) {
+        selectedTier = tier;
+        document.getElementById('tierInstant').className = 'tier-btn' + (tier === 'instant' ? ' tier-active' : '');
+        document.getElementById('tierEconomy').className = 'tier-btn' + (tier === 'economy' ? ' tier-active' : '');
+        // Recalculate
+        document.getElementById('amount').dispatchEvent(new Event('input'));
+    }
+    let currentOrderId = null;
+    let pollInterval = null;
+
+    const $=id=>document.getElementById(id);
+    const ANALYTICS = 'https://especie-analytics.malneto.workers.dev/collect';
+
+    function track(event, props) {
+        fetch(ANALYTICS, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ event, properties: props || {} }),
+        }).catch(()=>{});
+    }
+
+    // Track page view
+    track('exchange_page_view', { referrer: document.referrer });
+
+    // Calculate receive amount
+    $('amount').addEventListener('input', () => {
+        const v = parseFloat($('amount').value.replace(',','.')) || 0;
+        if (v > 0) {
+            const t = TIERS[selectedTier];
+            const fee = v * t.fee;
+            const recv = Math.max(0, v - fee);
+            $('receiveAmount').value = recv.toFixed(2).replace('.',',');
+            $('feeDisplay').textContent = `R$ ${fee.toFixed(2).replace('.',',')} (${t.label}) • ${t.eta}`;
+        } else {
+            $('receiveAmount').value = '';
+            $('feeDisplay').textContent = '3,9%';
+        }
+    });
+
+    async function createDeposit() {
+        const amount = parseFloat($('amount').value.replace(',','.'));
+        const address = $('address').value.trim();
+
+        if (!amount || amount < MIN) {
+            showError(`Valor mínimo: R$ ${MIN}`);
+            return;
+        }
+        const tierMax = TIERS[selectedTier].max;
+        if (amount > tierMax) {
+            showError('Valor máximo: R$ ' + tierMax + ' para o modo ' + (selectedTier === 'instant' ? 'instantâneo' : 'econômico'));
+            return;
+        }
+        if (!address || !address.startsWith('lq1q')) {
+            showError('Informe um endereço Liquid válido (começa com lq1q)');
+            return;
+        }
+
+        $('btnExchange').disabled = true;
+        $('btnExchange').textContent = 'Criando...';
+        hideError();
+
+        try {
+            const res = await fetch(API + '/deposit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ amount, liquid_address: address, tier: selectedTier }),
+            });
+            const data = await res.json();
+
+            if (data.error) {
+                showError(data.details || data.error);
+                $('btnExchange').disabled = false;
+                $('btnExchange').textContent = 'Gerar QR PIX';
+                return;
+            }
+
+            currentOrderId = data.order_id;
+
+            // Show QR
+            if (data.pix_qr_code_base64) {
+                $('qrImg').innerHTML = `<img src="${data.pix_qr_code_base64}" alt="QR Code PIX">`;
+            }
+            $('pixCode').textContent = data.pix_qr_code || '';
+
+            $('formStep').style.display = 'none';
+            $('qrStep').classList.add('active');
+
+            // Track conversion
+            track('exchange_qr_generated', { amount, address: address.slice(0, 20) });
+            if (typeof fbq !== 'undefined') fbq('track', 'InitiateCheckout', {value: amount, currency: 'BRL'});
+            if (typeof gtag !== 'undefined') gtag('event', 'begin_checkout', {value: amount, currency: 'BRL'});
+
+            // Start polling
+            pollInterval = setInterval(pollStatus, 5000);
+        } catch (e) {
+            showError('Erro de conexão. Tente novamente.');
+            $('btnExchange').disabled = false;
+            $('btnExchange').textContent = 'Gerar QR PIX';
+        }
+    }
+
+    async function pollStatus() {
+        if (!currentOrderId) return;
+        try {
+            const res = await fetch(API + '/status/' + currentOrderId, {
+                headers: {},
+            });
+            const data = await res.json();
+            if (data.status === 'completed') {
+                clearInterval(pollInterval);
+                $('qrStep').classList.remove('active');
+                $('doneStep').classList.add('active');
+                const recv = data.net_amount || data.amount;
+                $('doneMsg').textContent = `R$ ${recv.toFixed(2).replace('.',',')} em DEPIX enviados para sua wallet.`;
+                track('exchange_completed', { amount: data.amount, received: recv, tier: data.tier });
+                if (typeof fbq !== 'undefined') fbq('track', 'Purchase', {value: recv, currency: 'BRL'});
+                if (typeof gtag !== 'undefined') gtag('event', 'purchase', {value: recv, currency: 'BRL'});
+            } else if (data.status === 'pending_cold_sign') {
+                $('waitingText').textContent = 'PIX confirmado! DEPIX será enviado em até 24h.';
+            }
+        } catch (_) {}
+    }
+
+    function copyPix() {
+        const code = $('pixCode').textContent;
+        navigator.clipboard.writeText(code).then(() => {
+            $('copyBar').style.borderColor = '#4CAF50';
+            setTimeout(() => { $('copyBar').style.borderColor = '#252525'; }, 1500);
+        });
+    }
+
+    function resetForm() {
+        $('doneStep').classList.remove('active');
+        $('formStep').style.display = 'block';
+        $('amount').value = '';
+        $('receiveAmount').value = '';
+        $('address').value = '';
+        $('btnExchange').disabled = false;
+        $('btnExchange').textContent = 'Gerar QR PIX';
+        currentOrderId = null;
+    }
+
+    function saveEmail() {
+        const email = $('emailInput').value.trim();
+        if (!email || !email.includes('@')) return;
+        // Send to analytics worker
+        fetch('https://especie-analytics.malneto.workers.dev/collect', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ event: 'email_subscribe', properties: { email } }),
+        }).catch(()=>{});
+        $('emailOk').style.display = 'block';
+        $('emailInput').style.display = 'none';
+        $('emailInput').parentElement.querySelector('.email-btn').style.display = 'none';
+    }
+
+    function showError(msg) {
+        $('errorMsg').textContent = msg;
+        $('errorMsg').style.display = 'block';
+    }
+    function hideError() {
+        $('errorMsg').style.display = 'none';
+    }
+    </script>
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Espécie - Comprar DEPIX",
+        "url": "https://especie.app",
+        "description": "Troque PIX por DEPIX instantaneamente. Sem cadastro, sem KYC.",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "BRL",
+            "description": "Taxa de 3,9% por transação"
+        }
+    }
+    </script>
+</body>
+</html>
